@@ -4,7 +4,6 @@ on:
   push:
     branches: [ master ]
   schedule:
-    # * is a special character in YAML so you have to quote this string
     - cron:  '0 2 * * *'
 
 jobs:
@@ -14,10 +13,18 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Run a one-line script
-      run: echo Hello, world!
-
-    - name: Run a multi-line script
+    - name: Install gh-tools
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        curl -fsSL -O https://github.com/appscodelabs/gh-tools/releases/download/v0.1.1/gh-tools-linux-amd64
+        chmod +x gh-tools-linux-amd64
+        sudo mv gh-tools-linux-amd64 /usr/local/bin/gh-tools
+
+    - name: Protect Branches
+      env:
+        GH_TOOLS_TOKEN: ${{ secrets.GH_TOOLS_TOKEN }}
+      run: gh-tools protect --dryrun=false
+
+    - name: Add Labels
+      env:
+        GH_TOOLS_TOKEN: ${{ secrets.GH_TOOLS_TOKEN }}
+      run: gh-tools add-labels

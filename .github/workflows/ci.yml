@@ -15,7 +15,7 @@ jobs:
 
     - name: Install gh-tools
       run: |
-        curl -fsSL -O https://github.com/appscodelabs/gh-tools/releases/download/v0.2.0/gh-tools-linux-amd64
+        curl -fsSL -O https://github.com/appscodelabs/gh-tools/releases/download/v0.2.1/gh-tools-linux-amd64
         chmod +x gh-tools-linux-amd64
         sudo mv gh-tools-linux-amd64 /usr/local/bin/gh-tools
 
@@ -25,7 +25,7 @@ jobs:
       run: gh-tools protect --dryrun=false
 
     - name: Avoid Rate Limit
-      run: sleep 660
+      run: sleep 15m
 
     - name: Add Labels
       env:

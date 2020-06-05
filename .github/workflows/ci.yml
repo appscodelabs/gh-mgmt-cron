@@ -24,6 +24,9 @@ jobs:
         GH_TOOLS_TOKEN: ${{ secrets.GH_TOOLS_TOKEN }}
       run: gh-tools protect --dryrun=false
 
+    - name: Avoid Rate Limit
+      run: sleep 660
+
     - name: Add Labels
       env:
         GH_TOOLS_TOKEN: ${{ secrets.GH_TOOLS_TOKEN }}

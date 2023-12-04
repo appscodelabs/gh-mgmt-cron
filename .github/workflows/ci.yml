@@ -5,12 +5,12 @@ on:
     branches: [master]
   schedule:
     - cron: '0 20 * * *'
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -27,7 +27,9 @@ jobs:
       - name: Protect Branches
         env:
           GH_TOOLS_TOKEN: ${{ secrets.LGTM_GITHUB_TOKEN }}
-        run: gh-tools protect --dryrun=false
+        run: |
+          gh-tools protect --dryrun=false \
+            --skip=appscode-images/builder
 
       - name: Avoid Rate Limit
         run: sleep 15m

@@ -34,6 +34,15 @@ jobs:
       - name: Avoid Rate Limit
         run: sleep 15m
 
+      - name: Activate Dependabot
+        env:
+          GH_TOOLS_TOKEN: ${{ secrets.LGTM_GITHUB_TOKEN }}
+        run: |
+          gh-tools dependabot --fork=true
+
+      - name: Avoid Rate Limit
+        run: sleep 15m
+
       - name: Add Labels
         env:
           GH_TOOLS_TOKEN: ${{ secrets.LGTM_GITHUB_TOKEN }}

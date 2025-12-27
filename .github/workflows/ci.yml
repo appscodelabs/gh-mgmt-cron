@@ -32,7 +32,7 @@ jobs:
             --skip=appscode-images/builder
 
       - name: Avoid Rate Limit
-        run: sleep 15m
+        run: sleep 30m
 
       - name: Activate Dependabot
         env:
@@ -41,7 +41,7 @@ jobs:
           gh-tools dependabot --fork=true
 
       - name: Avoid Rate Limit
-        run: sleep 15m
+        run: sleep 30m
 
       - name: Add Labels
         env:

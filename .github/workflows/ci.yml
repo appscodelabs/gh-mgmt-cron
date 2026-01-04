@@ -29,6 +29,7 @@ jobs:
           GH_TOOLS_TOKEN: ${{ secrets.LGTM_GITHUB_TOKEN }}
         run: |
           gh-tools protect --dryrun=false \
+            --fork=true \
             --skip=appscode-images/builder
 
       - name: Avoid Rate Limit

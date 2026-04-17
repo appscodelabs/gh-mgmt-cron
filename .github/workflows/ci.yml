@@ -32,17 +32,11 @@ jobs:
             --fork=true \
             --skip=appscode-images/builder
 
-      - name: Avoid Rate Limit
-        run: sleep 30m
-
       - name: Activate Dependabot
         env:
           GH_TOOLS_TOKEN: ${{ secrets.LGTM_GITHUB_TOKEN }}
         run: |
           gh-tools dependabot --fork=true
-
-      - name: Avoid Rate Limit
-        run: sleep 30m
 
       - name: Add Labels
         env:
